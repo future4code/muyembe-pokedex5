@@ -1,10 +1,13 @@
 import React from 'react'
 import Router from './rotas/Router'
+import { ContextoPokemon } from './contexto/ContextoPokemon';
+import detalhesPokemons from './hooks/usePokemons'
 
-function App() {
+export default function App() {
+  const dadosPokemons = detalhesPokemons()
   return (
-    <Router />
+    <ContextoPokemon.Provider value={dadosPokemons}>
+      <Router />
+    </ContextoPokemon.Provider>
   )
 }
-
-export default App;

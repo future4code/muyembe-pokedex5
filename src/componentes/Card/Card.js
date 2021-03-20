@@ -3,33 +3,49 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { goToDetalhes } from '../../rotas/Coordenadas'
 import fundo from '../../img/layoutFundo.jpg'
-import { ContainerCard, DesignCard, ImgFundoCard, ImgPokemon, Buttons, BotaoAdd, BotaoDetalhes } from './CardEstilizacao'
+import { 
+    ContainerCard, 
+    DesignCard, 
+    ImgFundoCard, 
+    ImgPokemon, 
+    Buttons, 
+    BotaoAdd, 
+    BotaoDetalhes 
+} from './CardEstilo'
 
 const Card = () => {
     const history = useHistory()
     const [imgFrontal, setImgFrontal] = useState([])
+    const [pokedex, setPokedex] = useState([])
+    // const [estouNaPokedex, setEstouNaPokedex] = useState(false)
+    // setEstouNaPokedex(localStorage.getItem("estouNaPokedex"))
 
-    const pegaId = (id) => {
-        localStorage.setItem("idPokemon", id)
+    const pegaId = (imagemPokemon) => {
+        const numerodecaracteres = imagemPokemon.length
+        if(numerodecaracteres === 79)
+        {   
+            const numeroId = imagemPokemon.substring(imagemPokemon.lastIndexOf("/")+1).substring(2,0)
+            localStorage.setItem("idPokemon", numeroId)
+        }else{
+            const numeroId = imagemPokemon.substring(imagemPokemon.lastIndexOf("/")+1).substring(1,0) 
+            localStorage.setItem("idPokemon", numeroId) 
+        }
+        
         goToDetalhes(history)
+    }
+
+    const addPokemon = (pokemon) => {
+        const novoPokemon = pokemon
+        setPokedex(pokedex => [...pokedex, novoPokemon])
+        localStorage.setItem("Pokedex", pokedex)
     }
 
     const pegaImgs = () => {
         let i = 1
         for (i = 1; i <= 20; i++) {
-            axios
-                .get(`https://pokeapi.co/api/v2/pokemon-form/${i}/`)
-                .then((resposta) => {
-                    const novaimg = (resposta.data.sprites.front_default)
-                    setImgFrontal(imgFrontal => [...imgFrontal, novaimg])
-                })
-                .catch((erro) => {
-                    console.log(erro)
-                })
+            const novaimg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`
+            setImgFrontal(imgFrontal => [...imgFrontal, novaimg])
         }
-        const imagensPokemons = [...new Set(imgFrontal)]
-        return imagensPokemons
-
     }
 
     useEffect(() => {
@@ -39,21 +55,49 @@ const Card = () => {
 
     return (
         <ContainerCard>
+            {/* {estouNaPokedex ? (
+                imgFrontal.map((imagemPokemon) => {
+                
+                    return (
+                        <DesignCard>
+                            <ImgFundoCard src={fundo} />
+                            <ImgPokemon src={imagemPokemon} />
+                            <Buttons>
+                                <BotaoAdd onClick={() => addPokemon(imagemPokemon)}>Adicionar</BotaoAdd>
+                                <BotaoDetalhes onClick={() => pegaId(imagemPokemon)}>Ver Detalhes</BotaoDetalhes>
+                            </Buttons>
+                        </DesignCard>
+                    )
+                })
+            ):(
+                pokedex.map((pokemon) => {
+                
+                    return (
+                        <DesignCard>
+                            <ImgFundoCard src={fundo} />
+                            <ImgPokemon src={pokemon} />
+                            <Buttons>
+                                <BotaoAdd onClick={() => addPokemon(pokemon)}>Adicionar</BotaoAdd>
+                                <BotaoDetalhes onClick={() => pegaId(pokemon)}>Ver Detalhes</BotaoDetalhes>
+                            </Buttons>
+                        </DesignCard>
+                    )
+                })
+            )} */}
             {imgFrontal.map((imagemPokemon) => {
-                var id = (imagemPokemon.substring(imagemPokemon.lastIndexOf("/")+1).substr(0,1))
+                
                 return (
                     <DesignCard>
                         <ImgFundoCard src={fundo} />
                         <ImgPokemon src={imagemPokemon} />
-
                         <Buttons>
-                            <BotaoAdd>Adicionar</BotaoAdd>
-                            <BotaoDetalhes onClick={() => pegaId(id)}>Ver Detalhes</BotaoDetalhes>
+                            <BotaoAdd onClick={() => addPokemon(imagemPokemon)}>Adicionar</BotaoAdd>
+                            <BotaoDetalhes onClick={() => pegaId(imagemPokemon)}>Ver Detalhes</BotaoDetalhes>
                         </Buttons>
                     </DesignCard>
                 )
-            })}
-
+            })
+        }
         </ContainerCard>
     )
 }

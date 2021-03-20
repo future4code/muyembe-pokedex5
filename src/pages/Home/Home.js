@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Card from '../../componentes/Card/Card'
 import { goToPokedex } from '../../rotas/Coordenadas'
-import { Container, Header } from './HomeEstilizacao'
-import axios from 'axios'
+import { Container, Header } from './HomeEstilo'
 
 const Home = () => {
     const history = useHistory()
 
+    const estadoPokedex = () => {
+        localStorage.setItem("estouNaPokedex", true)
+        goToPokedex(history)
+    }
+
     return (
         <Container>
             <Header>
-                <button onClick={() => goToPokedex(history)}>Ver minha Pokedex</button>
+                <div></div>
+                <button onClick={estadoPokedex}>Ver minha Pokedex</button>
                 <header>Lista de Pokemons</header>
                 <div></div>
             </Header>
