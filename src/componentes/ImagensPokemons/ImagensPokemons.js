@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ContextoPokemon } from '../../contexto/ContextoPokemon'
 import { ContainerImagemPokemon, ImgPokemon } from './ImagensPokemonsEstilo'
 
 const ImagensPokemons = () => {
-    const id = localStorage.getItem("idPokemon")
-    const imgFrontal = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-    const imgTrazeira = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`
+    const dadosPokemons = useContext(ContextoPokemon)
+    const imgFrontal = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dadosPokemons.id}.png`
+    const imgTrazeira = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${dadosPokemons.id}.png`
     return (
         <ContainerImagemPokemon>
             <ImgPokemon src={imgFrontal} />

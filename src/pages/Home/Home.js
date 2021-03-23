@@ -2,13 +2,11 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Card from '../../componentes/Card/Card'
 import { goToPokedex } from '../../rotas/Coordenadas'
-import { Container, Header } from './HomeEstilo'
+import { Container, Header, TamanhoImgPokebola } from './HomeEstilo'
 
 const Home = () => {
     const history = useHistory()
-
     const estadoPokedex = () => {
-        localStorage.setItem("estouNaPokedex", true)
         goToPokedex(history)
     }
 
@@ -18,7 +16,9 @@ const Home = () => {
                 <div></div>
                 <button onClick={estadoPokedex}>Ver minha Pokedex</button>
                 <header>Lista de Pokemons</header>
-                <div></div>
+                <span>
+                <TamanhoImgPokebola class="emojidex-emoji" src="https://cdn.emojidex.com/emoji/seal/pokeball.png" emoji-code="pokeball" alt="pokeball" />
+                </span>
             </Header>
             <Card />
         </Container>

@@ -7,5 +7,5 @@ export const goToPokedex = (history) => {
 }
 
 export const goToDetalhes = (history) => {
-    history.push("/detalhes")
+    history.push(`/detalhes`)
 }

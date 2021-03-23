@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const usePokemons = () => {
     const [id, setId] = useState("")
-    const [nomePokemon, setNomePokemon] = useState("")
+    const [nome, setNome] = useState("")
     const [imagemFrontal, setImagemFrontal] = useState("")
     const [imagemTrazeira, setImagemTrazeira] = useState("")
     const [hp, setHP] = useState("")
@@ -17,13 +17,13 @@ const usePokemons = () => {
     const [movimento1, setMovimento1] = useState("")
     const [movimento2, setMovimento2] = useState("")
     const [movimento3, setMovimento3] = useState("")
-    const pokeId = localStorage.getItem("idPokemon")
+
+    const [meusPokemons, setMeusPokemons] = useState([])
 
     axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${pokeId}/`)
+        .get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
         .then((resposta) => {
-            setId(resposta.data.id)
-            setNomePokemon(resposta.data.forms.[0].name)
+            setNome(resposta.data.forms.[0].name)
             setTipo1(resposta.data.types.[0].type.name)
             setTipo2(resposta.data.types.[1].type.name)
             setHP(resposta.data.stats.[0].base_stat)
@@ -40,25 +40,28 @@ const usePokemons = () => {
 
         })
         .catch((erro) => {
-            console.log(erro)
+            console.log(erro.response)
         })
 
     const detalhesPokemons = {
-        id: id,
-        nome: nomePokemon,
-        imagemFrontal: imagemFrontal,
-        imagemTrazeira: imagemTrazeira,
-        hp: hp,
-        ataque: ataque,
-        defesa: defesa,
-        ataqueEspecial: ataqueEspecial,
-        defesaEspecial: defesaEspecial,
-        velocidade: velocidade,
-        tipo1: tipo1,
-        tipo2: tipo2,
-        movimento1: movimento1,
-        movimento2: movimento2,
-        movimento3: movimento3
+        id,
+        setId,
+        nome,
+        imagemFrontal,
+        imagemTrazeira,
+        hp,
+        ataque,
+        defesa,
+        ataqueEspecial,
+        defesaEspecial,
+        velocidade,
+        tipo1,
+        tipo2,
+        movimento1,
+        movimento2,
+        movimento3,
+        meusPokemons, 
+        setMeusPokemons
     }
 
 

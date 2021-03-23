@@ -4,7 +4,7 @@ import { ContextoPokemon } from '../../contexto/ContextoPokemon'
 
 const Estatisticas = () => {
     const dadosPokemons = useContext(ContextoPokemon)
-        return (
+    return (
         <ContainerEstatisticas>
             <h3>Estatisticas</h3>
             <p>HP: {dadosPokemons.hp}</p>

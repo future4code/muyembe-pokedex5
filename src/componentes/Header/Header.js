@@ -9,8 +9,8 @@ const ContainerHeader = styled.header`
     justify-content: space-between;
 `
 const Header = () => {
-    const dadosPokemons = useContext(ContextoPokemon)
-    const nomePokemon = (dadosPokemons.nome).toLocaleUpperCase()
+    const {nome} = useContext(ContextoPokemon)
+    const nomePokemon = (nome).toLocaleUpperCase()
     const history = useHistory()
 
     const goToBack = () => {

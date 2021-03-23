@@ -3,6 +3,7 @@ import { ContainerTipoEMovimento, Tipo, Movimentos } from './TipoEMovimentoEstil
 import { ContextoPokemon } from '../../contexto/ContextoPokemon'
 
 const TipoEMovimento = () => {
+
     const dadosPokemons = useContext(ContextoPokemon)
 
     return (

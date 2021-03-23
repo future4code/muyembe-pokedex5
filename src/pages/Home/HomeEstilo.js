@@ -14,3 +14,8 @@ export const Header = styled.header`
     border: 1px solid black;
     padding: 1.25rem;
 `
+
+export const TamanhoImgPokebola = styled.img`
+    width: 1rem;
+    padding-left: 22rem;
+`
