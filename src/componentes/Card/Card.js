@@ -18,6 +18,8 @@ const Card = () => {
     const history = useHistory()
     const [imgFrontal, setImgFrontal] = useState([])
 
+    console.log("Dados Pokemons: ", dadosPokemons.nome)
+
     const pegaId = (imagemPokemon) => {
         
         const numerodecaracteres = imagemPokemon.length

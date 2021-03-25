@@ -15,21 +15,24 @@ import {
 } from '../../componentes/Card/CardEstilo'
 
 const Pokedex = () => {
-    const dadosPokemons = useContext(ContextoPokemon)
+    const { meusPokemons } = useContext(ContextoPokemon)
     const history = useHistory()
 
+
     const removePokemon = (removePokedex) => {
-        const comparativo = () => {
-            return removePokedex === dadosPokemons.imagemFrontal
-        }
-        const novaPokedex = dadosPokemons.meusPokemons.filter(comparativo)
-        dadosPokemons.setMeusPokemons(novaPokedex)
+        console.log(removePokedex)
+        // const indiceDoArrayPokedex = meusPokemons.indexOf(removePokedex)
+        // function comparativo(pokemon) {
+        //     return pokemon !== indiceDoArrayPokedex;
+        // }
+        // const novaPokedex = meusPokemons.filter(comparativo)
+        // setMeusPokemons(novaPokedex)
     }
 
     const listaPokemon =
-        dadosPokemons.meusPokemons.lenght === 0 ?
-            "Adicione novos pokemons a sua pokedex" :
-            dadosPokemons.meusPokemons.map((imagemPokemon) => {
+        meusPokemons.lenght === 0 ?
+            <p>Adicione novos pokemons a sua pokedex</p> :
+            meusPokemons.map((imagemPokemon) => {
                 return (
                     <DesignCard>
                         <ImgFundoCard src={fundo} />

@@ -7,21 +7,26 @@ const ContainerHeader = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 900px;
 `
 const Header = () => {
-    const {nome} = useContext(ContextoPokemon)
-    const nomePokemon = (nome).toLocaleUpperCase()
+    const { id, nome } = useContext(ContextoPokemon)
     const history = useHistory()
 
     const goToBack = () => {
         localStorage.removeItem("idPokemon")
         history.goBack()
     }
+
+    const addRemovePokemon = () => {
+        alert(id)
+    }
+
     return (
         <ContainerHeader>
             <button onClick={() => goToBack(history)}>voltar</button>
-            <h3>{nomePokemon}</h3>
-            <button>Adicionar/Remover da Pokedex</button>
+            <h3>{nome.toLocaleUpperCase()}</h3>
+            <button onClick={addRemovePokemon}>Adicionar/Remover da Pokedex</button>
         </ContainerHeader>
     )
 }
